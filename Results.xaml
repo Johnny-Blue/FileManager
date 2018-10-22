@@ -1,0 +1,19 @@
+﻿<Window x:Class="FileManager.Results"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Results" Height="720" Width="1280">
+    <Grid Height="690" Width="1240">
+        <DataGrid AutoGenerateColumns="True" Height="640" HorizontalAlignment="Left" Margin="5,5,0,0" Name="dataGrid1" VerticalAlignment="Top" Width="1220" DataContext="{Binding}" CanUserDeleteRows="{Binding}" ItemsSource="{Binding}">
+            <!--<DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding.Path="FileID"}" Header="File ID" Visibility="Hidden" />
+                <DataGridTextColumn Binding="{Binding.Path=Filename}" Header="File Name" />
+            </DataGrid.Columns>-->
+        </DataGrid>
+        <Button Content="Delete selected" Height="23" HorizontalAlignment="Left" Margin="651,651,0,0" Name="btnDelete" VerticalAlignment="Top" Width="97" Click="btnDelete_Click" />
+        <Button Content="Delete all in folder" Height="23" HorizontalAlignment="Right" Margin="0,651,367,0" Name="btnDelFolder" VerticalAlignment="Top" Width="114" Click="btnDelFolder_Click" />
+        <Button Content="Ignore selected" Height="23" HorizontalAlignment="Right" Margin="0,651,241,0" Name="btnIgnoreSelected" VerticalAlignment="Top" Width="97" Click="btnIgnoreSelected_Click" />
+        <Button Content="Ignore folder" Height="23" HorizontalAlignment="Right" Margin="0,651,138,0" Name="btnIgnoreFolder" VerticalAlignment="Top" Width="97" Click="btnIgnoreFolder_Click" />
+        <Button Content="Reset Ignored" Height="23" HorizontalAlignment="Right" Margin="0,651,15,0" Name="btnResetIgnored" VerticalAlignment="Top" Width="97" Click="btnResetIgnored_Click" />
+    </Grid>
+    
+</Window>

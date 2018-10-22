@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FileSystemLibraryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="FileSystemLibraryModelStoreContainer">
+          <EntitySet Name="Directory" EntityType="FileSystemLibraryModel.Store.Directory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="File" EntityType="FileSystemLibraryModel.Store.File" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Directory">
+          <Key>
+            <PropertyRef Name="DirectoryID" />
+          </Key>
+          <Property Name="DirectoryID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DirectoryName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ParentID" Type="bigint" />
+          <Property Name="Ignore" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="DirectoryID" Type="bigint" Nullable="false" />
+          <Property Name="Checksum" Type="varchar" MaxLength="512" />
+          <Property Name="CreationTime" Type="datetime" />
+          <Property Name="CreationTimeUTC" Type="datetime" />
+          <Property Name="Length" Type="bigint" />
+          <Property Name="ErrorMessage" Type="nvarchar(max)" />
+          <Property Name="Ignore" Type="bit" Nullable="false" />
+        </EntityType>
+        <Function Name="ResetData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FileSystemLibraryModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="FileSystemLibraryEntities">
+          <EntitySet Name="Directories" EntityType="FileSystemLibraryModel.Directory" />
+          <EntitySet Name="Files" EntityType="FileSystemLibraryModel.File" />
+          <FunctionImport Name="ResetData" />
+        </EntityContainer>
+        <EntityType Name="Directory">
+          <Key>
+            <PropertyRef Name="DirectoryID" />
+          </Key>
+          <Property Type="Int64" Name="DirectoryID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="DirectoryName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="ParentID" />
+          <Property Type="Boolean" Name="Ignore" Nullable="false" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Type="Int64" Name="FileID" Nullable="false" a:StoreGeneratedPattern="Identity" xmlns:a="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="FileName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="DirectoryID" Nullable="false" />
+          <Property Type="String" Name="Checksum" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreationTime" />
+          <Property Type="DateTime" Name="CreationTimeUTC" />
+          <Property Type="Int64" Name="Length" />
+          <Property Type="String" Name="ErrorMessage" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Ignore" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FileSystemLibraryModelStoreContainer" CdmEntityContainer="FileSystemLibraryEntities">
+          <EntitySetMapping Name="Directories">
+            <EntityTypeMapping TypeName="FileSystemLibraryModel.Directory">
+              <MappingFragment StoreEntitySet="Directory">
+                <ScalarProperty Name="Ignore" ColumnName="Ignore" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="DirectoryName" ColumnName="DirectoryName" />
+                <ScalarProperty Name="DirectoryID" ColumnName="DirectoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="FileSystemLibraryModel.File">
+              <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="Ignore" ColumnName="Ignore" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="CreationTimeUTC" ColumnName="CreationTimeUTC" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="Checksum" ColumnName="Checksum" />
+                <ScalarProperty Name="DirectoryID" ColumnName="DirectoryID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ResetData" FunctionName="FileSystemLibraryModel.Store.ResetData" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="FileSystemLibraryModel">
+        <EntityTypeShape EntityType="FileSystemLibraryModel.Directory" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="FileSystemLibraryModel.File" Width="1.5" PointX="2.75" PointY="0.75" Height="2.5571907552083326" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
